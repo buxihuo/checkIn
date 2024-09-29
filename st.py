@@ -1,5 +1,4 @@
-# featurize port export 6006
-# streamlit run  st.py --server.port 6006 --server.maxUploadSize 2
+# streamlit run  st.py --server.port 6006
 import streamlit as st
 from streamlit_js_eval import streamlit_js_eval, copy_to_clipboard, create_share_link, get_geolocation
 import json,os
@@ -19,7 +18,7 @@ if device_type is not None:
         st.write("您使用的是平板设备,请使用移动设备打卡")
         deviceFlag = 0
     else:
-        deviceFlag = 1 
+        deviceFlag = 0
         st.warning("您使用的是桌面设备,请使用移动设备打卡")
     print(device_type)
 
@@ -34,7 +33,6 @@ if not cookies.ready():
     st.stop()
 
 if deviceFlag:
-
     # 创建 SQLite 数据库连接
     conn = sqlite3.connect('attendance.db')
     c = conn.cursor()
@@ -59,13 +57,8 @@ if deviceFlag:
     current_date = datetime.now().strftime('%Y-%m-%d')
     
     # 获取用户输入的姓名和部门
-
-    
-    
-
     nameStr = cookies['name'] if 'name' in cookies else ""
     name = st.text_input("请输入姓名",value = nameStr)
-
 
     # 部门选择框，默认值为“知识系统部”
     department_options = ['知识系统部', '其他']
@@ -131,20 +124,16 @@ if deviceFlag:
         checkInFlag = st.button("上班打卡")
         checkOutFlag = st.button("下班打卡")
 
-
         if checkInFlag or checkOutFlag:
             if not checkboxFlag:
                 st.warning("请先勾选确认打卡")
             
-    
         if checkboxFlag:
-
             if checkInFlag:
                 check_in()
             if checkOutFlag:
                 check_out()
             
-    
         # 显示该用户当天的打卡记录
         c.execute("SELECT * FROM attendance WHERE name = ? AND department = ? AND date = ?", (name, department, current_date))
         record = c.fetchone()
