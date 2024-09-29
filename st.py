@@ -68,9 +68,9 @@ if deviceFlag:
     
     # 确保用户输入了姓名
     if not name:
-        st.warning("请先输入姓名。")
+        st.warning("请先输入姓名")
     elif not locationBox:
-        st.warning("请先获取位置。")
+        st.warning("请先获取位置")
     else:
         # 定义函数进行上班打卡
         if name != cookies.get('name'):
@@ -138,7 +138,7 @@ if deviceFlag:
         c.execute("SELECT * FROM attendance WHERE name = ? AND department = ? AND date = ?", (name, department, current_date))
         record = c.fetchone()
         if record:
-            st.write(f"今天的打卡记录: 上班时间: {record[4]} (位置: {record[5]}) 下班时间: {record[6]} (位置: {record[7]})")
+            st.write(f"今天的打卡记录: \n上班时间: {record[4]} (位置: {record[5]}) \n下班时间: {record[6]} (位置: {record[7]})")
         else:
             st.write("今天还没有打卡记录")
     
