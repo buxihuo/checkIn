@@ -12,7 +12,7 @@ st.title("打卡系统")
 device_type = streamlit_js_eval(js_expressions="navigator.userAgent", key="getUserAgent")
 if device_type is not None:
     if "Mobi" in device_type or "Android" in device_type:
-        st.write("您使用的是移动设备")
+        # st.write("您使用的是移动设备")
         deviceFlag = 1 
     elif "iPad" in device_type or "Tablet" in device_type:
         st.write("您使用的是平板设备,请使用移动设备打卡")
