@@ -79,7 +79,7 @@ if deviceFlag:
         location = get_geolocation()
         if location:
             location = str(location['coords']['latitude']) + ',' + str(location['coords']['longitude'])
-        st.write(f"位置： {location}")
+        # st.write(f"位置： {location}")
         def check_in():
             current_time = datetime.now().strftime('%H:%M:%S')
             # 检查当天是否已有上班打卡记录
